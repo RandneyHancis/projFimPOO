@@ -40,15 +40,17 @@ public class Jogo extends javax.swing.JFrame {
         
         nomeCasa.setText("Cartas da " + casa.getNomeJogador());
         nomeJogador.setText("Cartas do " + jogador.getNomeJogador());
-        cartaJogador1.setVisible(false);
-        cartaJogador2.setVisible(false);
-        cartaJogador3.setVisible(false);
-        cartaJogador4.setVisible(false);
-        cartaJogador5.setVisible(false);        
-        cartaCasa2.setVisible(false);
-        cartaCasa3.setVisible(false);
-        cartaCasa4.setVisible(false);
-        cartaCasa5.setVisible(false);
+        
+        JButton botaoJogador[];
+        JButton botaoCasa[];
+        
+        botaoJogador = new JButton[]{cartaJogador1, cartaJogador2, cartaJogador3, cartaJogador4, cartaJogador5};
+        botaoCasa = new JButton[] {cartaCasa2, cartaCasa3, cartaCasa4, cartaCasa5};
+        
+        for(JButton b : botaoJogador)
+            b.setVisible(false);
+        for(JButton b : botaoCasa)
+            b.setVisible(false);       
         imagemInicialCartas();
         
     }
@@ -56,16 +58,16 @@ public class Jogo extends javax.swing.JFrame {
     //método que mostra a parte de trás das cartas do baralho
     public void imagemInicialCartas() {
         ImageIcon imgInicial = new ImageIcon(getClass().getResource("../imgCartas/backtile.png"));
-        cartaCasa1_img.setIcon(imgInicial);
-        cartaCasa2_img.setIcon(imgInicial);
-        cartaCasa3_img.setIcon(imgInicial);
-        cartaCasa4_img.setIcon(imgInicial);
-        cartaCasa5_img.setIcon(imgInicial);
-        cartaJogador1_img.setIcon(imgInicial);
-        cartaJogador2_img.setIcon(imgInicial);
-        cartaJogador3_img.setIcon(imgInicial);
-        cartaJogador4_img.setIcon(imgInicial);
-        cartaJogador5_img.setIcon(imgInicial);
+        JLabel cartasCasa[];
+        JLabel cartasJogador[];
+        
+        cartasCasa = new JLabel[]{cartaCasa1_img, cartaCasa2_img, cartaCasa3_img, cartaCasa4_img, cartaCasa5_img};
+        cartasJogador = new JLabel[] {cartaJogador1_img, cartaJogador2_img, cartaJogador3_img, cartaJogador4_img, cartaJogador5_img};
+        
+        for(JLabel lbl : cartasCasa)
+            lbl.setIcon(imgInicial);
+        for(JLabel lbl : cartasJogador)
+           lbl.setIcon(imgInicial);
     }
     
         
@@ -561,68 +563,66 @@ public class Jogo extends javax.swing.JFrame {
      * 
      */
     
+    //método para ação das cartas da casa
+    private int acaoBotaoCasa(int iValor, JButton casaEnabler, JButton casaVisible) {
+        i = iValor;
+        imagemCartaCasa(i);
+        casaEnabler.setEnabled(false);
+        casaVisible.setVisible(true);
+        
+        return i;
+    } 
+    
     private void cartaCasa2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cartaCasa2ActionPerformed
-        i = 1;
-        imagemCartaCasa(i);          
-        cartaCasa2.setEnabled(false);
-        cartaJogador2.setVisible(true);
+        acaoBotaoCasa(1, cartaCasa2, cartaJogador2);        
     }//GEN-LAST:event_cartaCasa2ActionPerformed
 
     private void cartaCasa3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cartaCasa3ActionPerformed
-        i = 2;
-        imagemCartaCasa(i);        
-        cartaCasa3.setEnabled(false);
-        cartaJogador3.setVisible(true);
+        acaoBotaoCasa(2, cartaCasa3, cartaJogador3);   
     }//GEN-LAST:event_cartaCasa3ActionPerformed
 
     private void cartaCasa4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cartaCasa4ActionPerformed
-        i = 3;
-        imagemCartaCasa(i);        
-        cartaCasa4.setEnabled(false);
-        cartaJogador4.setVisible(true);
+       acaoBotaoCasa(3, cartaCasa4, cartaJogador4);   
     }//GEN-LAST:event_cartaCasa4ActionPerformed
 
     private void cartaCasa5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cartaCasa5ActionPerformed
-        i = 4;
-        imagemCartaCasa(i);
-        cartaCasa5.setEnabled(false);
-        cartaJogador5.setVisible(true);
+        acaoBotaoCasa(4, cartaCasa5, cartaJogador5);   
     }//GEN-LAST:event_cartaCasa5ActionPerformed
 
+    
+    //método para a ação do botão das cartas do jogador
+    //Botão jogador 5 não recebe esse método
+    private int acaoBotaoJogador(int iValor, JButton jogadorEnabler, JButton jogadorVisible) {
+        j = iValor;
+        imagemCartaJogador(j);        
+        jogadorEnabler.setEnabled(false);
+        jogadorVisible.setVisible(true);
+        
+        return j;
+    }
+    
     private void cartaJogador1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cartaJogador1ActionPerformed
-        j = 0;
-        imagemCartaJogador(j);
+        acaoBotaoJogador(0, cartaJogador1, cartaCasa2);  
         somaDePontos(i, j);
-        botaoVencedorRodada(i, j, evt, cartaCasa1);
-        cartaJogador1.setEnabled(false);
-        cartaCasa2.setVisible(true);
+        botaoVencedorRodada(i, j, evt, cartaCasa1);        
     }//GEN-LAST:event_cartaJogador1ActionPerformed
 
     private void cartaJogador2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cartaJogador2ActionPerformed
-        j = 1;
-        imagemCartaJogador(j);        
+        acaoBotaoJogador(1, cartaJogador2, cartaCasa3);            
         somaDePontos(i, j);
-        botaoVencedorRodada(i, j, evt, cartaCasa2);
-        cartaJogador2.setEnabled(false);
-        cartaCasa3.setVisible(true);
+        botaoVencedorRodada(i, j, evt, cartaCasa2);        
     }//GEN-LAST:event_cartaJogador2ActionPerformed
 
     private void cartaJogador3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cartaJogador3ActionPerformed
-        j = 2;
-        imagemCartaJogador(j);        
+        acaoBotaoJogador(2, cartaJogador3, cartaCasa4);  
         somaDePontos(i, j);
-        botaoVencedorRodada(i, j, evt, cartaCasa3);
-        cartaJogador3.setEnabled(false);
-        cartaCasa4.setVisible(true);
+        botaoVencedorRodada(i, j, evt, cartaCasa3);       
     }//GEN-LAST:event_cartaJogador3ActionPerformed
 
     private void cartaJogador4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cartaJogador4ActionPerformed
-        j = 3;
-        imagemCartaJogador(j);        
+        acaoBotaoJogador(3, cartaJogador4, cartaCasa5);  
         somaDePontos(i, j);
         botaoVencedorRodada(i, j, evt, cartaCasa4);
-        cartaJogador4.setEnabled(false);
-        cartaCasa5.setVisible(true);
     }//GEN-LAST:event_cartaJogador4ActionPerformed
 
     private void cartaJogador5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cartaJogador5ActionPerformed
@@ -636,10 +636,7 @@ public class Jogo extends javax.swing.JFrame {
     }//GEN-LAST:event_cartaJogador5ActionPerformed
 
     private void cartaCasa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cartaCasa1ActionPerformed
-        i = 0;        
-        imagemCartaCasa(i);               
-        cartaCasa1.setEnabled(false);
-        cartaJogador1.setVisible(true);
+        acaoBotaoCasa(0, cartaCasa1, cartaJogador1);   
     }//GEN-LAST:event_cartaCasa1ActionPerformed
      
     private void ResetJogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetJogoActionPerformed
@@ -660,66 +657,38 @@ public class Jogo extends javax.swing.JFrame {
                 
         
         //tentei criar um método para fazer as mudanças, mas não deu certo
-        //o dito cujo está comentado mais acima
-        cartaJogador1.setVisible(false);        
-        cartaJogador1.setEnabled(true);        
-        cartaJogador1.setBackground(Color.LIGHT_GRAY);
-        cartaJogador1.setForeground(Color.YELLOW);
-        cartaJogador1.setText("Carta 1");
+        //o dito cujo está comentado mais acima        
+        JButton novaCartaJogador[];
+        JButton novaCartaCasa[];
         
-        cartaJogador2.setVisible(false);
-        cartaJogador2.setEnabled(true);        
-        cartaJogador2.setBackground(Color.LIGHT_GRAY);
-        cartaJogador2.setForeground(Color.YELLOW);
-        cartaJogador2.setText("Carta 2");
+        novaCartaJogador = new JButton[] {cartaJogador1, cartaJogador2, cartaJogador3, cartaJogador4, cartaJogador5};
+        novaCartaCasa = new JButton[] {cartaCasa2, cartaCasa3, cartaCasa4, cartaCasa5};
         
-        cartaJogador3.setVisible(false);
-        cartaJogador3.setEnabled(true);        
-        cartaJogador3.setBackground(Color.LIGHT_GRAY);
-        cartaJogador3.setForeground(Color.YELLOW);
-        cartaJogador3.setText("Carta 3");
+        int indxJ = 1;
+        int indxC = 2;
         
-        cartaJogador4.setVisible(false);
-        cartaJogador4.setEnabled(true);        
-        cartaJogador4.setBackground(Color.LIGHT_GRAY);
-        cartaJogador4.setForeground(Color.YELLOW);
-        cartaJogador4.setText("Carta 4");
-        
-        cartaJogador5.setVisible(false);
-        cartaJogador5.setEnabled(true);        
-        cartaJogador5.setBackground(Color.LIGHT_GRAY);
-        cartaJogador5.setForeground(Color.YELLOW);
-        cartaJogador5.setText("Carta 5");
-        
+        for (JButton c : novaCartaJogador){            
+            c.setVisible(false);
+            c.setEnabled(true);
+            c.setBackground(Color.LIGHT_GRAY);
+            c.setForeground(Color.BLACK);
+            c.setText("Carta "+indxJ);
+            indxJ++;
+        }
+                
+        for (JButton c : novaCartaCasa){            
+            c.setVisible(false);
+            c.setEnabled(true);
+            c.setBackground(Color.LIGHT_GRAY);
+            c.setForeground(Color.BLACK);
+            c.setText("Carta "+indxC);
+            indxC++;
+        }
+
         cartaCasa1.setEnabled(true);        
         cartaCasa1.setBackground(Color.LIGHT_GRAY);
         cartaCasa1.setForeground(Color.YELLOW);
-        cartaCasa1.setText("Carta 1");
-        
-        cartaCasa2.setVisible(false);
-        cartaCasa2.setEnabled(true);
-        cartaCasa2.setBackground(Color.LIGHT_GRAY);
-        cartaCasa2.setForeground(Color.YELLOW);
-        cartaCasa2.setText("Carta 2");
-        
-        cartaCasa3.setVisible(false);
-        cartaCasa3.setEnabled(true);
-        cartaCasa3.setBackground(Color.LIGHT_GRAY);
-        cartaCasa3.setForeground(Color.YELLOW);
-        cartaCasa3.setText("Carta 3");
-        
-        cartaCasa4.setVisible(false);
-        cartaCasa4.setEnabled(true);
-        cartaCasa4.setBackground(Color.LIGHT_GRAY);
-        cartaCasa4.setForeground(Color.YELLOW);
-        cartaCasa4.setText("Carta 4");
-        
-        cartaCasa5.setVisible(false);
-        cartaCasa5.setEnabled(true);
-        cartaCasa5.setBackground(Color.LIGHT_GRAY);
-        cartaCasa5.setForeground(Color.YELLOW);
-        cartaCasa5.setText("Carta 5");
-        
+        cartaCasa1.setText("Carta 1");        
     }//GEN-LAST:event_ResetJogoActionPerformed
     
     
